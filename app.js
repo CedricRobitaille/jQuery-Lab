@@ -70,10 +70,76 @@ const queryPokemon = (searchInput) => {
 
 
 
-// Generate Modal
+// Generate modal on card click
 const generateModal = (pokemonId) => {
   $.get(`${apiUrl}/${pokemonId}`, function(pokemon, status) {
-    console.log(pokemon)
+    $.get(`${pokemon.species.url}`, function(species, status) {
+      console.log(pokemon)
+      console.log(species)
+
+      const modalStructure = `
+      <img src="${pokemon.sprites.front_default}" alt="${pokemon.name} sprite" class="modal-sprite">
+
+      <article>
+        <div id="poke-info">
+          <p class="poke-number">N°${pokemon.id}</p>
+          <h1 class="pokemon-name">${pokemon.name}</h1>
+          <p class="description">${species.flavor_text_entries[0].flavor_text}</p>
+        </div>
+
+        <hr>
+
+        <div id="stats">
+          <h2>Stats</h2>
+          <div class="stats-container">
+          </div>
+          <div class="type-container">
+            <p class="grass">Grass</p>
+            <p class="poison">Poison</p>
+          </div>
+          <div class="ability-container">
+            <p class="ability">Overgrow</p>
+            <p class="ability">Chlorophyll</p>
+          </div>
+        </div>
+
+        <hr>
+
+        <div id="evolutions">
+          <h2>Evolutions</h2>
+          <div class="evolution-container">
+            <img src="img" alt="evo1" class="evolution">
+            <img src="img" alt="evo2" class="evolution">
+            <img src="img" alt="evo3" class="evolution">
+          </div>
+        </div>
+
+        <button id="add-to-team">Add to Team</button>
+
+      </article>
+      `
+      $("#pokemon-information").html(modalStructure)
+
+      pokemon.stats.forEach((stat, index) => {
+        const statElem = `
+          <div class="stat" id="${stat.stat.name}">
+            <p class="stat-name">${stat.stat.name.replace("-", " ")}</p>
+            <p class="stat-value">${stat.base_stat}</p>
+            <div class="stat-graph-container">
+              <div class="stat-graph-active"></div>
+              <div class="stat-graph-inactive"></div>
+            </div>
+          </div>
+        `
+        $(".stats-container").append(statElem)
+        const statPercentage = (stat.base_stat / 150) * 100
+        $(`#${stat.stat.name} .stat-graph-active`).css("width", `${statPercentage}`)
+        $(`#${stat.stat.name} .stat-graph-inactive`).css("width", `${100 - statPercentage}`)
+      })
+      
+
+      
+    })
   })
 }
 
