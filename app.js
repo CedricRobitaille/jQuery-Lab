@@ -72,6 +72,13 @@ const queryPokemon = (searchInput) => {
 
 // Generate modal on card click
 const generateModal = (pokemonId) => {
+
+  if ($("#pokemon-information").length) {
+    $("#pokemon-information").empty()
+  } else {
+    const modal = `<section id="pokemon-information"></section>`
+    $("main").append(modal)
+  }
   $.get(`${apiUrl}/${pokemonId}`, function(pokemon, status) {
     $.get(`${pokemon.species.url}`, function(species, status) {
       console.log(pokemon)
@@ -178,6 +185,7 @@ const generateModal = (pokemonId) => {
     })
   })
 }
+
 
 
 $(function() {
