@@ -1,0 +1,248 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 p, ul, li, span, input {
+  font-family: "Lexend", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  list-style: none;
+}
+
+html {
+  background-color: #f6f8fc;
+  width: 100%;
+}
+body {
+  width: 100%;
+}
+
+nav {
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  padding: 1.5rem 2rem;
+  align-items: center;
+  text-transform: uppercase;
+  margin-bottom: 3rem;
+  box-shadow: 0px 6px 22px -12px rgba(63, 102, 153, 0.125);
+}
+
+nav #logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: .75rem;
+  
+}
+
+nav #logo img {
+  height: 1.75rem;
+}
+
+nav #logo h2 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #ff5350;
+  letter-spacing: 1px;
+}
+
+nav button {
+  position: relative;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #6f7b8b;
+  letter-spacing: .5px;
+}
+
+#nav-active::after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: calc(-1.75rem + 3px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 3px;
+  background-color: #ff5350;
+}
+
+
+
+
+/* MAIN */
+
+main {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+  padding: 2rem;
+  max-width: 92rem;
+  margin: 0 auto;
+}
+
+
+
+
+
+/* Primary Col */
+
+#primary-col {
+  width:100%;
+}
+
+
+
+
+/* FILTERS SECTION */
+
+#filters {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.search {
+  position: relative;
+}
+
+input {
+  width: 100%;
+  padding: 1.55rem;
+  font-size: 1.25rem;
+  border-radius: .5rem;
+  border: none;
+  box-shadow: 0px 2px 22px -3px rgba(63, 102, 153, 0.125);
+  outline: 0px solid #ff5350;
+  transition: .25s;
+}
+
+input:focus {
+  outline: 2px solid #ff5350;
+}
+
+#search-button {
+  position: absolute;
+  top: .85rem;
+  height: 3rem;
+  right: .85rem;
+  width: 3rem;
+  background-color: #ff5350;
+  border: none;
+  border-radius: .5rem;
+  padding: .35rem;
+  cursor: pointer;
+  transition: .25s;
+}
+
+#search-button img {
+  transition: .5s;
+}
+
+#search-button:hover {
+  background-color: #c9322f;
+}
+
+#search-button:hover img {
+  transform: rotate(15deg);
+}
+
+
+
+
+/* Pokedex Collection */
+
+#pokedex-collection {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 2.5rem;
+}
+
+.pokedex-card {
+  position: relative;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 9rem 2rem 2rem 2rem;
+  margin-top: 5rem;
+  margin-bottom: 0rem;
+  border-radius: 1rem;
+  box-shadow: 0px 6px 22px -12px rgba(63, 102, 153, 0.125);
+  max-width: 24rem;
+  transition: .75s;
+}
+
+.pokedex-card:hover {
+  margin-top: 3.5rem;
+  margin-bottom: 1.5rem;
+
+  box-shadow: 0px 24px 22px -8px rgba(63, 102, 153, 0.125);
+}
+
+.pokedex-sprite {
+  position: absolute;
+  height: 12rem;
+  width: 12rem;
+  top: -3rem;
+}
+
+.text-small {
+  font-size: .85rem;
+  font-weight: 700;
+  letter-spacing: 1.25px;
+  color: #6f7b8b;
+}
+
+h3 {
+  font-size: 1.75rem;
+}
+
+.type-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: .5rem;
+}
+
+.type-container p {
+  padding: .5rem .75rem;
+  background-color: #d8e5f5;
+  border-radius: 6px;
+  text-transform: uppercase;
+  font-size: .85rem;
+  font-weight: 700;
+}
+
+
+
+/* Information Modal */
+
+#pokemon-information {
+  position: sticky;
+  top: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  width: 100%;
+  max-width: 26rem;
+  height: fit-content;
+
+  background-color: #fff;
+  border-radius: 1rem;
+  padding: 2rem;
+
+  box-shadow: 0px 6px 22px -8px rgba(63, 102, 153, 0.125);
+}

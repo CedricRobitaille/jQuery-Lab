@@ -6,30 +6,41 @@
   <title>Pokemon Colosseum</title>
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
   <script src="app.js"></script>
+  <link rel="stylesheet" href="main.css">
 </head>
 <body>
   <nav>
-    <button>Pokedex</button>
+    <div id="logo">
+      <img src="images/icon_logo.svg" alt="Pokemon Colosseum Logo">
+      <h2>Pokemon Colosseum</h2>
+    </div>
+    
+    <button id="nav-active">Pokedex</button>
   </nav>
 
-  <section id="filters">
-    <div class="search">
-      <input type="search" placeholder="Search for a Pokemon / ID">
-      <button id="search-button"><img src="images/icon_pokeball_white.svg" alt="search button"></button>
-    </div>
-  </section>
+  
   
   <main>
-    <section id="pokedex-collection">
-      <div class="card" id="1">
-        <img src="img" alt="sprite">
-        <p class="text-small">N°1</p>
-        <h3>Bulbasaur</h3>
-        <div class="type-container">
-          <p class="grass">Grass</p>
-          <p class="poison">Poison</p>
+    <section id="primary-col">
+      <div id="filters">
+        <div class="search">
+          <input type="search" placeholder="Search for a Pokemon / ID">
+          <button id="search-button"><img src="images/icon_pokeball_white.svg" alt="search button"></button>
         </div>
       </div>
+      
+      <ul id="pokedex-collection">
+        <li class="pokedex-card" id="1">
+          <img src="img" alt="sprite" class="pokedex-sprite">
+          <p class="text-small">N°1</p>
+          <h3>Bulbasaur</h3>
+          <div class="type-container">
+            <p class="grass">Grass</p>
+            <p class="poison">Poison</p>
+          </div>
+        </li>
+      </ul>
+      
     </section>
     <section id="pokemon-information">
       <img src="img" alt="big sprite">
