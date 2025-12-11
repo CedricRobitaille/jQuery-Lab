@@ -1,5 +1,6 @@
 const apiUrl = "https://pokeapi.co/api/v2/pokemon"
 let page = 0;
+let loadPause = false;
 
 
 // Placeholder card to order fetched pokemon data
@@ -32,6 +33,7 @@ const generateManyPokedexEntries = (data) => {
   data.results.forEach(pokemon => {
     const id = pokemon.url.replace("https://pokeapi.co/api/v2/pokemon/", "").replace("/", "")
     generatePlaceholders(id)
+    page++;
   })
 
   // Populate placeholders
@@ -51,7 +53,7 @@ const fetchManyPokemon = () => {
 }
 
 
-
+// Search for pokemon
 const queryPokemon = (searchInput) => {
   $.get(`${apiUrl}/${searchInput}`, function(data, status) {
     $("#pokedex-collection").empty()
@@ -68,12 +70,39 @@ const queryPokemon = (searchInput) => {
 
 
 
+// Generate Modal
+const generateModal = (pokemonId) => {
+  $.get(`${apiUrl}/${pokemonId}`, function(pokemon, status) {
+    console.log(pokemon)
+  })
+}
 
 
 $(function() {
 
+  // Init Load
   $("#pokedex-collection").on("load", fetchManyPokemon())
-  $("#search-button").click(function () {
+
+  // Search Submit
+  $(".search").submit(function(event) {
+    event.preventDefault()
     queryPokemon($("#search-input").val())
   })
+
+  // Infinite Scroll
+  $(document).scroll(function() {
+    const scrollRemaining = $(document).height() - ($(window).scrollTop() + $(window).height());
+    if (scrollRemaining < 100 && !loadPause) {
+      loadPause = !loadPause
+      fetchManyPokemon()
+      setTimeout(() => {
+        loadPause = !loadPause;
+      }, 1000);
+    }
+  })
+})
+
+$(document).on("click", ".pokedex-card", function() {
+  const pokeId = $(this).attr("id")
+  generateModal(pokeId)
 })

@@ -186,6 +186,7 @@ input:focus {
   box-shadow: 0px 6px 22px -12px rgba(63, 102, 153, 0.125);
   max-width: 24rem;
   transition: .75s;
+  cursor: pointer;
 }
 
 .pokedex-card:hover {
