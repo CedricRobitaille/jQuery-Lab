@@ -397,7 +397,7 @@ hr {
 
 
 aside {
-  position: absolute;
+  position: sticky;
   bottom: 2rem;
   left: 2rem;
   background-color: #ff5350;
@@ -406,6 +406,7 @@ aside {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  width: fit-content;
 }
 
 #header {
