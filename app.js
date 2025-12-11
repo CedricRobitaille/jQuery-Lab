@@ -216,3 +216,7 @@ $(document).on("click", ".pokedex-card", function() {
   const pokeId = $(this).attr("id")
   generateModal(pokeId)
 })
+
+$(document).on("click", "#add-to-team", function() {
+  console.log("Add to team clicked")
+})
