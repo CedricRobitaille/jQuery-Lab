@@ -94,12 +94,8 @@ const generateModal = (pokemonId) => {
           <div class="stats-container">
           </div>
           <div class="type-container">
-            <p class="grass">Grass</p>
-            <p class="poison">Poison</p>
           </div>
           <div class="ability-container">
-            <p class="ability">Overgrow</p>
-            <p class="ability">Chlorophyll</p>
           </div>
         </div>
 
@@ -108,9 +104,6 @@ const generateModal = (pokemonId) => {
         <div id="evolutions">
           <h2>Evolutions</h2>
           <div class="evolution-container">
-            <img src="img" alt="evo1" class="evolution">
-            <img src="img" alt="evo2" class="evolution">
-            <img src="img" alt="evo3" class="evolution">
           </div>
         </div>
 
@@ -120,6 +113,7 @@ const generateModal = (pokemonId) => {
       `
       $("#pokemon-information").html(modalStructure)
 
+      // Stats
       pokemon.stats.forEach((stat, index) => {
         const statElem = `
           <div class="stat" id="${stat.stat.name}">
@@ -132,9 +126,51 @@ const generateModal = (pokemonId) => {
           </div>
         `
         $(".stats-container").append(statElem)
+        // Set the bargraph widths based on the base_stat value as a percentage of 150pts
         const statPercentage = (stat.base_stat / 150) * 100
         $(`#${stat.stat.name} .stat-graph-active`).css("width", `${statPercentage}`)
         $(`#${stat.stat.name} .stat-graph-inactive`).css("width", `${100 - statPercentage}`)
+      })
+      
+      // Types
+      pokemon.types.forEach((type, index) => {
+        const typeElem = `<p class="${type.type.name}">${type.type.name}</p>`
+        $("#pokemon-information .type-container").append(typeElem)
+      })
+
+      // Abiltiies
+      pokemon.abilities.forEach((ability, index) => {
+        const abilityElem = `<p class="ability">${ability.ability.name}</p>`
+        $("#pokemon-information .ability-container").append(abilityElem)
+      })
+
+      // Evolution Tree
+      $.get(`${species.evolution_chain.url}`, function(chain, status) {
+        const chainUrls = []
+
+        const getNextChain = (currPoke) => {
+          chainUrls.push(currPoke.species.name)
+          if (currPoke.evolves_to.length > 0) {
+            getNextChain(currPoke.evolves_to[0])
+          }
+        }
+        getNextChain(chain.chain)
+
+        // Placeholder Img
+        chainUrls.forEach((url, index) => {
+          const imgElem = `<img src="" alt="" class="evolution evo-${index}">`
+          $(".evolution-container").append(imgElem)
+        })
+        
+        // Ordered placement
+        chainUrls.forEach(async(url, index) => {
+          $.get(`${apiUrl}/${url}`, function(pokemon, status) {
+            console.log(pokemon)
+            $(`.evo-${index}`).attr("src", `${pokemon.sprites.front_default}`)
+            $(`.evo-${index}`).attr("alt", `${pokemon.name}`)
+          })
+        })
+        
       })
       
 
